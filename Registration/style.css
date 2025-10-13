@@ -1,0 +1,76 @@
+.page {
+
+    .container {
+        height: 100vh;
+        align-content: center;
+        justify-items: center;
+
+        .form {
+            text-align: center;
+
+            padding: 20px;
+            width: 40%;
+            border-radius: 20px;
+            border: 3px black solid;
+            form {
+            text-align: center;
+
+                input {
+                    width: 90%;
+                    padding: 10px ;
+                    outline: none;
+                    margin-top: 5px;
+                    border: 0;
+                    border-bottom: 2px solid black;
+                }
+
+                .btn {
+                    padding: 10px 15px;
+                    border: 2px solid black;
+                    border-radius: 10px;
+                    background-color: black;
+                    color: white;
+                    outline: none;
+                    margin-bottom: 10px;
+                    transition: .5s;
+                    position: relative;
+                    overflow: hidden;
+                    width: 90%;
+                    margin-top: 20px;
+                    cursor: pointer;
+                }
+
+                .btn::after {
+                    content: "";
+                    position: absolute;
+                    width: 40px;
+                    transform: rotate(10deg);
+                    height: 200%;
+                    background-color: white;
+                    top: -50%;
+                    right: -20%;
+                    transition: .5s;
+                }
+
+                .btn:hover {
+                    background-color: transparent;
+                    color: black;
+                }
+
+                .btn:hover::after {
+                    right: 100%;
+                    transition: .5s;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:992px) {
+    .page .container .form {
+        width: 100%;
+    }
+}
+.hide{
+    display: none;
+}
