@@ -50,7 +50,12 @@ signupform.addEventListener("submit", (e) => {
   ) {
     if (passwordSignup.value !== confirmPasswordSignup.value) {
       document.getElementById("pass-len").innerHTML =
-        "Enter The Same Passwords";
+  `     <span style="color:red">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
+          Enter The Same Passwords
+        </span>
+        `;
+        ;
     } else if (passwordSignup.value && confirmPasswordSignup.value) {
       signupform.parentElement.parentElement.classList.add("hide");
       loginform.parentElement.parentElement.classList.remove("hide");
@@ -83,11 +88,20 @@ loginform.addEventListener("submit", (e) => {
         </span>
       `;
         return;
-      } else {
+      } else if (emailLogin.value != emailLs ) {
         document.getElementById("error").innerHTML = `
          <span style="color:red">
           <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
            You don't have account you must sign up
+        </span>
+        
+        `;
+      }
+      else {
+                document.getElementById("error").innerHTML = `
+         <span style="color:red">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
+           Password is Wrong
         </span>
         
         `;
