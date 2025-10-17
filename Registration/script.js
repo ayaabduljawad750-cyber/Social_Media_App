@@ -4,13 +4,19 @@ let firstNameSignup = document.querySelector(`input[name="fname-sign"]`);
 let userNameSignup = document.querySelector(`input[name="uname-sign"]`);
 let emailSignup = document.querySelector(`input[name="email-sign"]`);
 let passwordSignup = document.querySelector(`input[name="password-sign"]`);
+
 let confirmPasswordSignup = document.querySelector(
   `input[name="confirm-password-sign"]`
 );
 
+let userId = Date.now();
+console.log(userId);
+let usersInSystem =
+  JSON.parse(localStorage.getItem("userAuthentication")) || [];
 signupform.addEventListener("submit", (e) => {
   e.preventDefault();
   let userAuthentication = {
+    id: userId,
     fullname: firstNameSignup.value,
     userName: userNameSignup.value,
     Email: emailSignup.value,
@@ -21,11 +27,21 @@ signupform.addEventListener("submit", (e) => {
     passwordSignup.value.length < 8 ||
     confirmPasswordSignup.value.length < 8
   ) {
-    document.getElementById("pass-len").innerHTML =
-      "Password must be greater or equal to 8";
+    document.getElementById("pass-len").innerHTML = `
+
+           <span style="color:red">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
+         Password must be greater or equal to 8
+        </span>
+      
+      `;
     if (passwordSignup.value != confirmPasswordSignup.value) {
-      document.getElementById("pass-len").innerHTML =
-        "Enter The Same Passwords they must be >= to 8";
+      document.getElementById("pass-len").innerHTML = `
+        <span style="color:red">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
+          Enter The Same Passwords they must be >= to 8
+        </span>
+        `;
     }
   }
   if (
@@ -39,10 +55,8 @@ signupform.addEventListener("submit", (e) => {
       signupform.parentElement.parentElement.classList.add("hide");
       loginform.parentElement.parentElement.classList.remove("hide");
       document.getElementById("pass-len").innerHTML = "";
-      localStorage.setItem(
-        "userAuthentication",
-        JSON.stringify(userAuthentication)
-      );
+      usersInSystem.push(userAuthentication);
+      localStorage.setItem("userAuthentication", JSON.stringify(usersInSystem));
     }
   }
 });
@@ -53,21 +67,40 @@ let passwordLogin = document.querySelector(`input[name="password-login"]`);
 loginform.addEventListener("submit", (e) => {
   e.preventDefault();
   if (localStorage.getItem("userAuthentication")) {
-    let emailLs = JSON.parse(localStorage.getItem("userAuthentication")).Email;
-    let passwordLs = JSON.parse(
-      localStorage.getItem("userAuthentication")
-    ).password;
-    if (emailLogin.value == emailLs && passwordLogin.value == passwordLs) {
-      // window.location.href = "" اكتب امتداد صفحة الهوم هنا
-window.location.href="../Home/home.html"
-      document.getElementById("error").innerHTML = "";
-    } else {
-      document.getElementById("error").innerHTML =
-        "Email or password is wronge";
+    for (let i = 0; i < usersInSystem.length; i++) {
+      let data = JSON.parse(localStorage.getItem("userAuthentication"));
+      console.log(data);
+      let emailLs = data[i].Email;
+      let passwordLs = data[i].password;
+      console.log(emailLs, passwordLs);
+      if (emailLogin.value == emailLs && passwordLogin.value == passwordLs) {
+        console.log("yes");
+        // window.location.href = "" اكتب امتداد صفحة الهوم هنا
+        document.querySelector("#error").innerHTML = `
+      <span style="color:red">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
+           ok
+        </span>
+      `;
+        return;
+      } else {
+        document.getElementById("error").innerHTML = `
+         <span style="color:red">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
+           You don't have account you must sign up
+        </span>
+        
+        `;
+      }
     }
   } else {
-    document.getElementById("error").innerHTML =
-      "You don't have account you must sign up";
+    document.getElementById("error").innerHTML = `
+        <span style="color:red">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
+           You don't have account you must sign up
+        </span>
+        
+      `;
   }
 });
 
@@ -83,3 +116,23 @@ document.querySelector("#SignUp-link").addEventListener("click", (e) => {
   loginform.parentElement.parentElement.classList.add("hide");
   signupform.parentElement.parentElement.classList.remove("hide");
 });
+
+let passwordInputs = document.querySelectorAll(".passwordInput");
+console.log(passwordInputs);
+let toggleIcons = document.querySelectorAll(".toggle-password");
+
+passwordInputs.forEach((passwordInput, i) => {
+  toggleIcons[i].addEventListener("click", () => {
+    passwordVisiability(passwordInput, i);
+  });
+});
+
+function passwordVisiability(passwordInput, i) {
+  if (passwordInput.getAttribute("type") == "password") {
+    passwordInput.setAttribute("type", "text");
+    toggleIcons[i].innerHTML = '<i class="fa-solid fa-eye eye"></i>';
+  } else {
+    passwordInput.type = "password";
+    toggleIcons[i].innerHTML = `<i class="fa-solid fa-eye-slash eye"></i>`;
+  }
+}

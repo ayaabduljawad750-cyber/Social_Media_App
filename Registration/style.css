@@ -12,12 +12,13 @@
             width: 40%;
             border-radius: 20px;
             border: 3px black solid;
+
             form {
-            text-align: center;
+                text-align: center;
 
                 input {
                     width: 90%;
-                    padding: 10px ;
+                    padding: 10px;
                     outline: none;
                     margin-top: 5px;
                     border: 0;
@@ -71,6 +72,44 @@
         width: 100%;
     }
 }
-.hide{
+
+.hide {
     display: none;
+}
+
+.eye-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* position: relative; */
+    /* width: 98%; */
+}
+
+.eye-container .eye {
+    /* position: absolute;
+    right: 0; */
+    margin-left: -20px;
+}
+
+.eye-container input {
+
+    width: 100%;
+}
+
+.err {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: red;
+
+    span {
+        width: 80%;
+    }
+
+
+}
+
+form{
+    cursor: pointer;
 }
