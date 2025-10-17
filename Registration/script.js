@@ -10,6 +10,7 @@ let confirmPasswordSignup = document.querySelector(
 );
 
 let userId = Date.now();
+let currentUser ;
 console.log(userId);
 let usersInSystem =
   JSON.parse(localStorage.getItem("userAuthentication")) || [];
@@ -80,6 +81,9 @@ loginform.addEventListener("submit", (e) => {
       console.log(emailLs, passwordLs);
       if (emailLogin.value == emailLs && passwordLogin.value == passwordLs) {
         console.log("yes");
+        currentUser = data[i];
+        console.log(currentUser)
+        localStorage.setItem("currentUser" , JSON.stringify(currentUser));
         // window.location.href = "" اكتب امتداد صفحة الهوم هنا
         document.querySelector("#error").innerHTML = `
       <span style="color:red">
