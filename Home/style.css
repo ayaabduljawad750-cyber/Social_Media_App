@@ -1,0 +1,223 @@
+/* ====== إعدادات عامة ====== */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+/* ====== الهيدر ====== */
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  color: #4b8ef1;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.sub-title {
+  color: #555;
+  font-size: 16px;
+  margin-top: 0;
+}
+
+/* ====== رسالة الترحيب ====== */
+#welcomeSection {
+  margin-top: 40px;
+}
+
+.no-posts {
+  color: #666;
+  font-size: 17px;
+  background: #fff;
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* ====== تصميم البوست ====== */
+.post {
+  background: #fff;
+  margin: 20px auto;
+  padding: 15px;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.post p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.post-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* ====== الزرار العائم (Add Post) ====== */
+#addPostBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4b8ef1;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: none;
+  font-size: 30px;
+  line-height: 60px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#addPostBtn:hover {
+  background-color: #357ae8;
+  transform: scale(1.05);
+}
+
+/* ====== الفورم ====== */
+#addPostForm {
+  background: #fff;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+textarea, input[type="url"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #4b8ef1;
+  color: white;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #357ae8;
+}
+
+button.cancel {
+  background-color: #999;
+}
+
+button.cancel:hover {
+  background-color: #777;
+}
+
+/* ====== اللايك والكومنت ====== */
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.like-btn {
+  background-color: #4b8ef1;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.like-btn.liked {
+  background-color: #ff4b5c;
+}
+
+.comment-section {
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.comment {
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 5px;
+  background: #f5f5f5;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.add-comment {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.add-comment input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-comment button {
+  background-color: #4b8ef1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-comment button:hover {
+  background-color: #357ae8;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .post, #addPostForm {
+    width: 90%;
+  }
+
+  #addPostBtn {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    line-height: 50px;
+  }
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  .sub-title {
+    font-size: 14px;
+  }
+}

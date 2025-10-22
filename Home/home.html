@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,4 +25,41 @@
     <script type="module" src="../footer/footer.js"></script>
     <script type="module" src="../header/header.js"></script>
   </body>
+=======
+<head>
+  <meta charset="UTF-8">
+  <title>Social Page</title>
+  <link rel="stylesheet" href="../css/all.min.css">
+  <link rel="stylesheet" href="../css/gloable.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header></header>
+  <header>
+    <h1>Welcome to Social</h1>
+    <p class="sub-title">Share your moments with the world</p>
+  </header>
+
+  <section id="welcomeSection">
+    <p class="no-posts">No posts yet. Be the first to share something!</p>
+  </section>
+
+  <div id="addPostForm" class="hidden">
+    <h3>Add a new post</h3>
+    <form id="postForm">
+      <textarea id="desc" placeholder="Write a description..." required></textarea>
+      <input type="url" id="imageLink" placeholder="Paste image link (optional)">
+      <br><br>
+      <button type="submit">Post</button>
+      <button type="button" id="cancelBtn" class="cancel">Cancel</button>
+    </form>
+  </div>
+
+  <div id="posts"></div>
+
+  <button id="addPostBtn">+</button>
+<script src="../header/header.js"></script>
+  <script src="index.js"></script>
+</body>
+>>>>>>> 47fedca (Initial commit)
 </html>
