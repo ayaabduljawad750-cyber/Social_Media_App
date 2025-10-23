@@ -98,6 +98,7 @@ function handleAddPost(e) {
 
   const posts = JSON.parse(localStorage.getItem("posts")) || [];
   const newPost = {
+    id:Date.now(), // I add it
     description: desc,
     image: imageLink || "",
     likes: 0,

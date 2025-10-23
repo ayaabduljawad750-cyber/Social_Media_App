@@ -5,7 +5,7 @@ import {
   SecondaryColor,
 } from "../Main/helpers.js";
 
-import {controlBoxPost} from "./controlBoxPost.js"
+import { controlBoxPost } from "./controlBoxPost.js";
 
 // parent profile
 let parentProfile = document.getElementById("parentProfile");
@@ -24,9 +24,9 @@ let email = document.createElement("p");
 let numberOfPosts = document.createElement("p");
 
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  let myPosts = JSON.parse(localStorage.getItem("posts")).filter(
-    (p) => p.authorId == JSON.parse(localStorage.getItem("currentUser")).id
-  );
+let myPosts = (JSON.parse(localStorage.getItem("posts")) || []).filter(
+  (p) => p.authorId == JSON.parse(localStorage.getItem("currentUser")).id
+);
 email.innerHTML = currentUser.Email;
 fullname.innerHTML = currentUser.fullname;
 iconLeft.innerHTML = currentUser.fullname[0];
@@ -84,8 +84,6 @@ if (myPosts.length == 0) {
   emptyBoxPosts.style.fontSize = "30px";
   boxPosts.appendChild(emptyBoxPosts);
 } else {
-
-
   for (let post of myPosts) {
     let postCard = document.createElement("div");
     let postTopBox = document.createElement("div");
@@ -116,6 +114,8 @@ if (myPosts.length == 0) {
     postControlBox.style.display = "flex";
     postCard.appendChild(postControlBox);
 
+    postCard.id = post.id;
+
     postUsername.innerHTML = JSON.parse(
       localStorage.getItem("currentUser")
     ).fullname;
@@ -135,145 +135,148 @@ if (myPosts.length == 0) {
 
     postBottomBox.appendChild(postDetails);
 
-    postAddLikeIcon.classList.add("fa-regular", "fa-heart");
+    postAddLikeIcon.classList.add(
+      post.liked ? "fa-solid" : "fa-regular",
+      "fa-heart"
+    );
 
-    postAddLikeIcon.style.color =  "#000";
+    postAddLikeIcon.style.color = post.liked ? "red" : "#000";
 
-    postAddLikeNumbers.innerHTML = myPosts.length;
-      postAddLikeBox.appendChild(postAddLikeIcon);
-      postAddLikeBox.appendChild(postAddLikeNumbers);
+    postAddLikeNumbers.innerHTML = post.likes;
+    postAddLikeBox.appendChild(postAddLikeIcon);
+    postAddLikeBox.appendChild(postAddLikeNumbers);
 
-        postAddCommentsIcon.classList.add("fa-regular", "fa-comment");
-  postAddCommentNumbers.innerHTML = post.comments.length;
-  postAddCommentBox.appendChild(postAddCommentsIcon);
-  postAddCommentBox.appendChild(postAddCommentNumbers);
+    postAddCommentsIcon.classList.add("fa-regular", "fa-comment");
+    postAddCommentNumbers.innerHTML = post.comments.length;
+    postAddCommentBox.appendChild(postAddCommentsIcon);
+    postAddCommentBox.appendChild(postAddCommentNumbers);
 
     postActions.appendChild(postAddLikeBox);
-  postActions.appendChild(postAddCommentBox);
+    postActions.appendChild(postAddCommentBox);
 
-  postParentComments.appendChild(postCommentsBox);
-  postParentComments.appendChild(postSendCommentBox);
-  postSendCommentBox.appendChild(postCommentTextarea);
-  postSendCommentBox.appendChild(postCommentSendButton);
+    postParentComments.appendChild(postCommentsBox);
+    postParentComments.appendChild(postSendCommentBox);
+    postSendCommentBox.appendChild(postCommentTextarea);
+    postSendCommentBox.appendChild(postCommentSendButton);
 
     postCommentSendButton.innerHTML = "Send";
-  postCommentTextarea.placeholder = "Add a comment ...";
-  postCommentTextarea.style.padding = "15px";
-  postCommentTextarea.style.borderRadius = "15px";
-  postCommentTextarea.style.width = "60%";
-  postCommentSendButton.style.padding = "15px";
-  postSendCommentBox.style.display = "flex";
-  postSendCommentBox.style.justifyContent = "center";
-  postSendCommentBox.style.gap = "10px";
-  postCommentSendButton.style.borderRadius = "15px";
-  postCommentSendButton.style.backgroundColor = "#166fe5";
-  postCommentSendButton.style.color = "#fff";
-  postCommentSendButton.style.fontSize = "20px";
-  postCommentSendButton.style.border = "none";
-  postCommentsBox.style.display = "flex";
-  postCommentsBox.style.alignItems = "center";
-  postCommentsBox.style.flexDirection = "column";
-  postCommentsBox.style.gap = "15px";
-  postCommentsBox.style.marginBottom = "15px";
+    postCommentTextarea.placeholder = "Add a comment ...";
+    postCommentTextarea.style.padding = "15px";
+    postCommentTextarea.style.borderRadius = "15px";
+    postCommentTextarea.style.width = "60%";
+    postCommentSendButton.style.padding = "15px";
+    postSendCommentBox.style.display = "flex";
+    postSendCommentBox.style.justifyContent = "center";
+    postSendCommentBox.style.gap = "10px";
+    postCommentSendButton.style.borderRadius = "15px";
+    postCommentSendButton.style.backgroundColor = "#166fe5";
+    postCommentSendButton.style.color = "#fff";
+    postCommentSendButton.style.fontSize = "20px";
+    postCommentSendButton.style.border = "none";
+    postCommentsBox.style.display = "flex";
+    postCommentsBox.style.alignItems = "center";
+    postCommentsBox.style.flexDirection = "column";
+    postCommentsBox.style.gap = "15px";
+    postCommentsBox.style.marginBottom = "15px";
 
     postCard.appendChild(postTopBox);
-  postCard.appendChild(postCenterBox);
-  postCard.appendChild(postBottomBox);
-  postCard.appendChild(postActions);
-  postCard.appendChild(postParentComments);
-  boxPosts.appendChild(postCard)
+    postCard.appendChild(postCenterBox);
+    postCard.appendChild(postBottomBox);
+    postCard.appendChild(postActions);
+    postCard.appendChild(postParentComments);
+    boxPosts.appendChild(postCard);
 
     postCard.style.width = "450px";
-  postCard.style.height = "fit-content";
+    postCard.style.height = "fit-content";
 
     postCenterBox.style.overflow = "hidden";
-  postCenterBox.style.width = "100%";
-  postCenterBox.style.display = post.image == "" ? "none" : "block";
-  postImg.style.width = "100%";
-  postImg.style.aspectRatio = "1/1";
-  postImg.style.objectFit = "cover";
-  postImg.style.transition = "transform 0.4s ease";
+    postCenterBox.style.width = "100%";
+    postCenterBox.style.display = post.image == "" ? "none" : "block";
+    postImg.style.width = "100%";
+    postImg.style.aspectRatio = "1/1";
+    postImg.style.objectFit = "cover";
+    postImg.style.transition = "transform 0.4s ease";
 
-  postCard.style.backgroundColor = "#fff";
-  postCard.style.margin = "15px 15px";
-  postCard.style.borderRadius = "15px";
+    postCard.style.backgroundColor = "#fff";
+    postCard.style.margin = "15px 15px";
+    postCard.style.borderRadius = "15px";
 
     for (let box of [
-    postTopBox,
-    postBottomBox,
-    postActions,
-    postParentComments,
-  ]) {
-    box.style.padding = "20px 20px";
-  }
+      postTopBox,
+      postBottomBox,
+      postActions,
+      postParentComments,
+    ]) {
+      box.style.padding = "20px 20px";
+    }
 
-  postTopBox.style.paddingTop =  "0px";
+    postTopBox.style.paddingTop = "0px";
 
-  postTopBox.style.display = "flex";
-  postTopBox.style.alignItems = "center";
-  postTopBox.style.gap = "25px";
+    postTopBox.style.display = "flex";
+    postTopBox.style.alignItems = "center";
+    postTopBox.style.gap = "25px";
 
-  postTopBoxLeftBox.style.width = "50px";
-  postTopBoxLeftBox.style.height = "50px";
-  postTopBoxLeftBox.style.borderRadius = "50%";
-  postTopBoxLeftBox.style.backgroundColor = "#166fe5";
-  postTopBoxLeftBox.style.display = "flex";
-  postTopBoxLeftBox.style.justifyContent = "center";
-  postTopBoxLeftBox.style.alignItems = "center";
-  postTopBoxLeftBox.style.color = "#fff";
+    postTopBoxLeftBox.style.width = "50px";
+    postTopBoxLeftBox.style.height = "50px";
+    postTopBoxLeftBox.style.borderRadius = "50%";
+    postTopBoxLeftBox.style.backgroundColor = "#166fe5";
+    postTopBoxLeftBox.style.display = "flex";
+    postTopBoxLeftBox.style.justifyContent = "center";
+    postTopBoxLeftBox.style.alignItems = "center";
+    postTopBoxLeftBox.style.color = "#fff";
 
-  postUsername.style.marginBottom = "5px";
-  postUsername.style.fontSize = "16px";
+    postUsername.style.marginBottom = "5px";
+    postUsername.style.fontSize = "16px";
 
-  postDate.style.color = "#71717A";
+    postDate.style.color = "#71717A";
 
-  postTitle.style.marginBottom = "10px";
-  postTitle.style.fontSize = "20px";
+    postTitle.style.marginBottom = "10px";
+    postTitle.style.fontSize = "20px";
 
-  postDetails.style.color = "#71717A";
+    postDetails.style.color = "#71717A";
 
     postActions.style.display = "flex";
-  postActions.style.alignItems = "center";
-  postActions.style.gap = "15px";
+    postActions.style.alignItems = "center";
+    postActions.style.gap = "15px";
 
-  for (let box of [postAddCommentBox, postAddLikeBox]) {
-    box.style.padding = "15px";
-    box.style.display = "flex";
-    box.style.gap = "15px";
-    box.style.alignItems = "center";
-    box.style.borderRadius = "15px";
-    box.style.transition = "all 0.4s ease";
+    for (let box of [postAddCommentBox, postAddLikeBox]) {
+      box.style.padding = "15px";
+      box.style.display = "flex";
+      box.style.gap = "15px";
+      box.style.alignItems = "center";
+      box.style.borderRadius = "15px";
+      box.style.transition = "all 0.4s ease";
 
-    // add hover effect
-    box.addEventListener("mouseover", () => {
-      box.style.backgroundColor = "#166fe5";
-      box.style.color = "#fff";
-    });
-    box.addEventListener("mouseleave", () => {
-      box.style.backgroundColor = "#fff";
-      box.style.color = "#000";
-    });
-  }
+      // add hover effect
+      box.addEventListener("mouseover", () => {
+        box.style.backgroundColor = "#166fe5";
+        box.style.color = "#fff";
+      });
+      box.addEventListener("mouseleave", () => {
+        box.style.backgroundColor = "#fff";
+        box.style.color = "#000";
+      });
+    }
 
     // Hover part
-  postImg.addEventListener("mouseover", () => {
-    postImg.style.transform = "scale(1.2)";
-  });
-  postImg.addEventListener("mouseleave", () => {
-    postImg.style.transform = "scale(1)";
-  });
+    postImg.addEventListener("mouseover", () => {
+      postImg.style.transform = "scale(1.2)";
+    });
+    postImg.addEventListener("mouseleave", () => {
+      postImg.style.transform = "scale(1)";
+    });
 
     const mediaQuery = window.matchMedia("(max-width: 900px)");
 
-  function handleScreenChange(e) {
-    if (e.matches) {
-      postCard.style.width = "80%";
-    } else {
-      postCard.style.width = "450px";
+    function handleScreenChange(e) {
+      if (e.matches) {
+        postCard.style.width = "80%";
+      } else {
+        postCard.style.width = "450px";
+      }
     }
-  }
 
-  mediaQuery.addEventListener("change", handleScreenChange);
+    mediaQuery.addEventListener("change", handleScreenChange);
   }
 }
 centerProfile.appendChild(titleCenterProfile);

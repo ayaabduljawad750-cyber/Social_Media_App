@@ -84,6 +84,10 @@ export function dialogDelete(postId, authorId) {
 
   deleteButton.addEventListener("click", () => {
     boxBigDialog.style.display = "none";
+    let posts = JSON.parse(localStorage.getItem("posts"))
+    posts = posts.filter((p)=>p.id!=postId)
+    localStorage.setItem("posts",JSON.stringify(posts))
+    document.getElementById(postId).style.display="none"
   });
 
   return boxBigDialog;

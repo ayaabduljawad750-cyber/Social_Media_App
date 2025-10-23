@@ -85,10 +85,7 @@ loginform.addEventListener("submit", (e) => {
         console.log(currentUser)
         localStorage.setItem("currentUser" , JSON.stringify(currentUser));
         // window.location.href = "" اكتب امتداد صفحة الهوم هنا
-<<<<<<< HEAD
-=======
         window.location.href="../Home/home.html"
->>>>>>> 47fedca (Initial commit)
         document.querySelector("#error").innerHTML = `
       <span style="color:red">
           <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
