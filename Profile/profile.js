@@ -258,6 +258,8 @@ if (myPosts.length == 0) {
       });
     }
 
+
+
     // Hover part
     postImg.addEventListener("mouseover", () => {
       postImg.style.transform = "scale(1.2)";

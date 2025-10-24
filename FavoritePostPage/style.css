@@ -1,6 +1,4 @@
-/* .saved-container{
-    
-} */
+
  *{
     margin: 0;
     padding: 0;
@@ -9,122 +7,95 @@
 .saved-header{
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
-    font-size: 20px;
-    font-weight: 800;
-    color: #1877f2;
+  
+     font-size: 36px;
+  font-weight: bold;
+    color: #166fe5;
 
 }
 
 
 .containerDiv{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    /* flex-direction: column; */
-    /* justify-content: space-between; */
+ 
+
+      display: flex;
+  flex-wrap: wrap;        
+  gap: 20px;            
+  padding: 20px;
+  justify-content: center;
 
 
 }
 .post{
-    display: flex;
-    /* flex-wrap: wrap; */
-    /* gap: 20px; */
+     background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  display: flex;
   flex-direction: column;
-    background-color: #ffffff;
-    justify-content: space-between;
-    margin: 15px 0 15px 0;
-    border-radius: 20px;
-    color: black;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    transition: all 0.5s ease;
-    
+  box-sizing: border-box; 
+
+ width: 450px;
+   
 }
 
-.unsave-btn{
-    display: inline;
-    
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 5px;
-    transition: all 0.5s ease;
-}
-.unsave-btn:hover{
-    background-color: #0056b3;
-}
-.back-btn{
-    text-decoration: none;
-    color: #1877f2;
-    width: 60px;
-    height: 20px;
-    padding: 20px;
-  
-    
-}
+
+ 
+
 #saved-container{
     display: flex;
     flex-direction: column;
    
-    height:auto;
+    min-height: 100vh;
     background-color:whitesmoke;
 }
 #saved-container h1{ 
     font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
-    /* align-self: center; */
-    /* width: 100px;
-    height: 100px; */
-    color: #1877f2;
-    /* font-size: 80px; */
-    /* text-align: center; */
+    
     margin: 30px 30px 0 15px;
     padding: 20px 20px 10px 0;
+      
+  font-weight: bold;
+  margin-bottom: 8px;
 
 }
 #saved-container p{
      font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
-    margin: 0px 30px 30px 15px;
+    
     padding: 10px 20px 20px 0;
     opacity: 0.6;
+    font-size: 14px;
+
 }
 #saved-container img{
+ 
+  
+  height: 200px;
+  object-fit: cover;
+  background: #f4f4f4; 
+  display: block;
     width: 100%;
  
-  height: 200px;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.post h2{
-display: inline;
-
-
+  background-color:rgb(202, 198, 198);
 }
 
 .no-posts-p{
     display: inline;
     align-self: center;
     font-size: 1.125rem;
-    /* font-weight: 400; */
+   
     opacity: 0.6;
     padding: 10px;
     margin-top:20px;
     
 }
-.saved-post-content{
-    /* display: flex; */
-    /* align-items: center; */
 
-}
-.saved-post-content h2{
- /* text-align: center; */
- margin:15px 0 0 15px;
-}
+
 .saved-post-link{
     cursor: pointer;
      text-decoration: none;
@@ -133,19 +104,16 @@ display: inline;
 }
 
 
-/* //////////////////////////////// */
-
-
 .user-header {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px;
-  /* margin-top: 20px; */
+  
   
   
 }
-..user-info{
+.user-info{
    margin-top: 20px;
 
 }
@@ -154,7 +122,7 @@ display: inline;
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #6c63ff;
+  background-color: #166fe5;
   color: white;
   display: flex;
   justify-content: center;
@@ -181,7 +149,76 @@ display: inline;
   font-size: 12px;
   color: gray;
 }
+.like-div{
+  display: inline;
+  width: 40px;
+  height: 30px;
+   margin: 10px 5px 10px 5px;
+  padding: 10px;
+  color: red;
+border-radius: 10px;
+cursor: pointer;
+}
+.like-div:hover{
+  background-color: #166fe5;
+  color: white;
 
+}
+.comment-div{
+  display: inline;
+  width: 40px;
+  height: 30px;
+  margin: 10px 5px 10px 5px;
+  padding: 10px;
+
+border-radius: 10px;
+cursor: pointer;
+}
+.comment-div:hover{
+  background-color: #166fe5;
+  color: white;
+}
+
+.comment-input{
+  min-height: 50px;
+  padding: 10px 12px;
+  margin: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+
+}
+.comment-input:focus{
+    border-color: #166fe5;
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+
+}
+.add-comment-btn{
+
+  background-color: #166fe5;
+  color: white;
+  padding: 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 10px ;
+  cursor: pointer;
+  
+
+}
+.add-comment-btn:hover{
+  background-color: #1670e5ce;
+}
+
+.comment-item{
+  border-radius: 10px ;
+  background-color: whitesmoke;
+  margin: 5px;
+ padding: 5px;
+}
 
 
 

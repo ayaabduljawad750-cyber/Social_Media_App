@@ -8,16 +8,13 @@ h1.textContent="Favorite Posts"
 let containerDiv=document.createElement("div");
 containerDiv.classList.add("containerDiv")
 savedSection.appendChild(containerDiv);
-let backbtn=document.createElement("a")
-backbtn.classList.add("back-btn");
-backbtn.setAttribute("href", "home.html");
-savedSection.appendChild(backbtn)
-backbtn.textContent="Go Back";
-const saved=JSON.parse(localStorage.getItem("savedPosts")) || [];
+const posts=JSON.parse(localStorage.getItem("posts")) || [];
+
+const likedposts=posts.filter(post=>post.liked === true);
 const noPostsP=document.createElement("p");
 noPostsP.textContent="No favorite posts yet. Start liking posts to see them here!"
 noPostsP.classList.add("no-posts-p");
-if(saved.length ===0){
+if(likedposts.length === 0){
   
   savedSection.innerHTML = "<h1>Favorite Posts</h1> <p>Posts you've liked</p>";
 
@@ -26,10 +23,10 @@ savedSection.appendChild(noPostsP);
 
 
 else{
-  const user = JSON.parse(localStorage.getItem("user"));
-const today = new Date().toLocaleDateString();
+  const user = JSON.parse(localStorage.getItem("currentUser")); // I add it
+  const today = new Date().toLocaleDateString();
 
-    saved.forEach((post, index) => {
+    likedposts.forEach((post, index) => {
         const div = document.createElement("div");
         div.classList.add("post");
         let postHTML = "";
@@ -39,21 +36,21 @@ let userHTML = "";
 if (user.avatar) {
   userHTML = `
     <div class="user-header">
-      <div class="avatar"><img src="${user.avatar}" alt="avatar"></div>
-      <div class="user-info">
-        <h3>${user.name}</h3>
-        <p>${today}</p>
-      </div>
+    <div class="avatar"><img src="${user.avatar}" alt="avatar"></div>
+    <div class="user-info">
+    <h3>${user.name}</h3>
+    <p>${today}</p>
+    </div>
     </div>
   `;
 } else {
   userHTML = `
     <div class="user-header">
-      <div class="avatar">${user.name.charAt(0).toUpperCase()}</div>
-      <div class="user-info">
-        <h3>${user.name}</h3>
-        <p>${today}</p>
-      </div>
+    <div class="avatar">${user.fullname.charAt(0).toUpperCase()}</div> 
+    <div class="user-info">
+      <h3>${user.fullname}</h3>
+    <p>${today}</p>
+    </div>
     </div>
   `;
 }
@@ -70,8 +67,8 @@ if (user.avatar) {
 
     
 
-    if (post.content) {
-      postHTML += `<p>${post.content}</p>`;
+    if (post.description) {
+      postHTML += `<p>${post.description}</p>`;
     }
   
 
@@ -85,26 +82,162 @@ div.innerHTML = `
 `;
 
 
-    const btn = document.createElement("button");
-btn.classList.add("unsave-btn");
-btn.setAttribute("data-index", index);
-btn.textContent = "Unsave";
-div.appendChild(btn);
+
+const likeSection = document.createElement("div");
+  likeSection.classList.add("like-section");
+
+likeSection.innerHTML = `
+  <div class="like-div">
+       <i class="fa-solid fa-heart like-btn"></i>
+       <span class="like-count">${post.likes || 0}</span>
+  </div>
+
+  <div class="comment-div">
+      <i class="fa-regular fa-comment comment-icon"></i>
+      <span class="comment-count">${post.comments ? post.comments.length : 0}</span>
+  </div>
+`;
 
 
 
-    
-        containerDiv.appendChild(div);
-    });
 
-const unsaveButton = document.querySelectorAll(".unsave-btn");
-unsaveButton.forEach(btn=>{
-    btn.addEventListener("click",e=>{
-const index=e.target.getAttribute("data-index");
-saved.splice(index,1);
-localStorage.setItem("savedPosts",JSON.stringify(saved));
-window.location.reload();
-    });
-    
-});
+      const commentBox = document.createElement("div");
+    commentBox.classList.add("comment-box");
+    commentBox.innerHTML = `
+      <input type="text" placeholder="Add a comment..." class="comment-input" />
+      <button class="add-comment-btn">Post</button>
+      <div class="comments-list"></div>
+    `;
+
+    div.appendChild(likeSection);
+    div.appendChild(commentBox);
+    containerDiv.appendChild(div);
+
+
+
+
+
+    const likeBtn = likeSection.querySelector(".like-btn");
+    const likeCount = likeSection.querySelector(".like-count");
+
+
+
+
+    if (post.liked) {
+      likeBtn.style.color = "red";
+    } else {
+      likeBtn.style.color = "gray";
+    }
+
+
+
+     likeBtn.addEventListener("click", () => {
+      post.liked = !post.liked;
+      post.likes = post.liked ? (post.likes || 0) + 1 : (post.likes || 1) - 1;
+
+
+
+
+
+       likeBtn.style.color = post.liked ? "red" : "gray";
+
+      likeCount.textContent = post.likes;
+      localStorage.setItem("posts", JSON.stringify(posts));
+      if (!post.liked) {
+  div.remove(); 
 }
+
+  const noPosts = document.querySelectorAll(".post");
+  if (noPosts.length === 0) {
+    const noPostsP = document.createElement("p");
+    noPostsP.textContent = "No favorite posts yet. Start liking posts to see them here!";
+    noPostsP.classList.add("no-posts-p");
+    savedSection.appendChild(noPostsP);
+  }
+
+
+
+    });
+
+
+
+     const commentInput = commentBox.querySelector(".comment-input");
+    const addCommentBtn = commentBox.querySelector(".add-comment-btn");
+    const commentsList = commentBox.querySelector(".comments-list");
+    const commentCount = likeSection.querySelector(".comment-count");
+
+
+if (post.comments && post.comments.length > 0) {
+  post.comments.forEach((comment) => {
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comment-item");
+
+    const nameU = document.createElement("strong");
+    nameU.textContent = comment.user; 
+
+    const textC = document.createElement("p");
+    textC.textContent = comment.text; 
+
+    commentDiv.appendChild(nameU);
+    commentDiv.appendChild(textC);
+    commentsList.appendChild(commentDiv);
+  });
+}
+
+
+addCommentBtn.addEventListener("click", () => {
+  const commentText = commentInput.value.trim();
+  if (commentText) {
+    if (!post.comments) post.comments = [];
+
+    const commentObj = {
+      user: user.name,
+      text: commentText
+    };
+
+    post.comments.push(commentObj);
+
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comment-item");
+
+    const nameU = document.createElement("strong");
+    nameU.textContent = user.name;
+
+    const textC = document.createElement("p");
+    textC.textContent = commentText;
+
+    commentDiv.appendChild(nameU);
+     commentDiv.appendChild(textC);
+     commentsList.appendChild(commentDiv);
+
+
+    
+
+    commentInput.value = "";
+     commentCount.textContent = post.comments.length;
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+
+      }
+
+      
+    }); 
+
+const commentIcon = likeSection.querySelector(".comment-icon");
+
+      commentBox.style.display = "none";
+
+      commentIcon.addEventListener("click", () => {
+    if (commentBox.style.display === "none") {
+      commentBox.style.display = "block";
+    } else {
+    commentBox.style.display = "none";
+    }
+});
+
+    
+      });
+} 
+    
+    
+    

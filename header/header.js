@@ -102,7 +102,7 @@ for (let item of [homeItem, favoritesItem, profileItem, signOutItem]) {
 }
 let linksHref = [
   "../Home/home.html",
-  "../FavoritePostPage/favorite.html",
+  "../FavoritePostPage/favorites.html",
   "../Profile/profile.html",
   "../Registration/index.html",
 ];
