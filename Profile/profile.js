@@ -104,11 +104,8 @@ if (myPosts.length == 0) {
     let postAddLikeNumbers = document.createElement("span");
     let postAddCommentsIcon = document.createElement("i");
     let postAddCommentNumbers = document.createElement("span");
-    let postParentComments = document.createElement("div");
-    let postCommentsBox = document.createElement("div");
-    let postSendCommentBox = document.createElement("div");
-    let postCommentTextarea = document.createElement("textarea");
-    let postCommentSendButton = document.createElement("button");
+    
+
 
     let postControlBox = controlBoxPost(post.id, post.authorId);
     postControlBox.style.display = "flex";
@@ -154,36 +151,17 @@ if (myPosts.length == 0) {
     postActions.appendChild(postAddLikeBox);
     postActions.appendChild(postAddCommentBox);
 
-    postParentComments.appendChild(postCommentsBox);
-    postParentComments.appendChild(postSendCommentBox);
-    postSendCommentBox.appendChild(postCommentTextarea);
-    postSendCommentBox.appendChild(postCommentSendButton);
 
-    postCommentSendButton.innerHTML = "Send";
-    postCommentTextarea.placeholder = "Add a comment ...";
-    postCommentTextarea.style.padding = "15px";
-    postCommentTextarea.style.borderRadius = "15px";
-    postCommentTextarea.style.width = "60%";
-    postCommentSendButton.style.padding = "15px";
-    postSendCommentBox.style.display = "flex";
-    postSendCommentBox.style.justifyContent = "center";
-    postSendCommentBox.style.gap = "10px";
-    postCommentSendButton.style.borderRadius = "15px";
-    postCommentSendButton.style.backgroundColor = "#166fe5";
-    postCommentSendButton.style.color = "#fff";
-    postCommentSendButton.style.fontSize = "20px";
-    postCommentSendButton.style.border = "none";
-    postCommentsBox.style.display = "flex";
-    postCommentsBox.style.alignItems = "center";
-    postCommentsBox.style.flexDirection = "column";
-    postCommentsBox.style.gap = "15px";
-    postCommentsBox.style.marginBottom = "15px";
+    
+  
+  
+
 
     postCard.appendChild(postTopBox);
     postCard.appendChild(postCenterBox);
     postCard.appendChild(postBottomBox);
     postCard.appendChild(postActions);
-    postCard.appendChild(postParentComments);
+
     boxPosts.appendChild(postCard);
 
     postCard.style.width = "450px";
@@ -205,7 +183,7 @@ if (myPosts.length == 0) {
       postTopBox,
       postBottomBox,
       postActions,
-      postParentComments,
+    
     ]) {
       box.style.padding = "20px 20px";
     }
