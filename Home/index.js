@@ -57,7 +57,10 @@ function showPosts() {
   // إنشاء كل بوست
   posts.forEach((post, index) => {
     const div = document.createElement("div");
+    div.id=post.id
     div.className = "post";
+    div.setAttribute("data-name",post.description)
+
     div.innerHTML = `
       <p>${post.description}</p>
       ${post.image ? `<img src="${post.image}" class="post-img">` : ""}
@@ -164,3 +167,50 @@ function addComment(index) {
 
   showPosts();
 }
+
+boxSearch = document.getElementById("search");
+inputSearch = document.createElement("input");
+btnSearch = document.createElement("button");
+btnIconSearch = document.createElement("i")
+
+btnIconSearch.classList.add("fa-solid","fa-magnifying-glass")
+
+boxSearch.appendChild(inputSearch);
+btnSearch.appendChild(btnIconSearch)
+boxSearch.appendChild(btnSearch);
+
+boxSearch.style.display = "flex";
+boxSearch.style.justifyContent = "center";
+// boxSearch.style.alignItems = "center";
+
+inputSearch.style.padding="10px"
+inputSearch.placeholder="Search ..."
+
+  const postsDiv = document.getElementById("posts");
+
+btnSearch.addEventListener("click",()=>{
+  let searchValue=inputSearch.value || ""
+  let hiddenPostsCount = 0
+  let notFound = document.getElementById("notFound")
+  if(notFound){
+      postsDiv.removeChild(notFound)
+  }
+    for (let child of postsDiv.children){
+      if(!child.getAttribute("data-name").includes(searchValue)){
+        child.classList.add("hidden")
+        hiddenPostsCount++
+      }
+      else{
+        child.classList.remove("hidden")
+      }
+    }
+    if(hiddenPostsCount==JSON.parse(localStorage.getItem("posts")).length){
+      let messageNotFound = document.createElement("h1")
+      messageNotFound.innerHTML="Not there Posts"
+      messageNotFound.style.textAlign="center"
+      messageNotFound.style.marginTop="150px"
+      messageNotFound.id="notFound"
+      postsDiv.appendChild(messageNotFound)
+    }
+
+})
