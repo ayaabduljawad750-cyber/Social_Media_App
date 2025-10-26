@@ -104,7 +104,7 @@ let linksHref = [
   "../Home/home.html",
   "../FavoritePostPage/favorites.html",
   "../Profile/profile.html",
-  "../Registration/index.html",
+  "../index.html",
 ];
 let i = 0;
 const currentPage = window.location.pathname.split("/").pop();

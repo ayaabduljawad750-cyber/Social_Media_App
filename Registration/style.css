@@ -11,10 +11,15 @@
             padding: 20px;
             width: 40%;
             border-radius: 20px;
-            border: 3px black solid;
+            border: 3px #4b8ef1 solid;
+            h1{
+                color: #4b8ef1;
+                margin-bottom:15px;
+            }
 
             form {
                 text-align: center;
+                
 
                 input {
                     width: 90%;
@@ -22,14 +27,16 @@
                     outline: none;
                     margin-top: 5px;
                     border: 0;
-                    border-bottom: 2px solid black;
+                    border-bottom: 2px solid #4b8ef1;
+                    color: #4b8ef1;
+                    font-weight: bold;
                 }
 
                 .btn {
                     padding: 10px 15px;
-                    border: 2px solid black;
+                    border: 2px solid #4b8ef1;
                     border-radius: 10px;
-                    background-color: black;
+                    background-color: #4b8ef1;
                     color: white;
                     outline: none;
                     margin-bottom: 10px;
@@ -55,12 +62,16 @@
 
                 .btn:hover {
                     background-color: transparent;
-                    color: black;
+                    color: #4b8ef1;
                 }
 
                 .btn:hover::after {
                     right: 100%;
                     transition: .5s;
+                }
+                a{
+                    color:#4b8ef1;
+                    font-weight: bold;
                 }
             }
         }
@@ -89,6 +100,7 @@
     /* position: absolute;
     right: 0; */
     margin-left: -20px;
+    color: #4b8ef1;
 }
 
 .eye-container input {

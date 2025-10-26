@@ -1,3 +1,65 @@
+let page = 
+`
+    <div class="page">
+        <div class="container">
+            <div class="form">
+                <h1>Sign Up</h1>
+                <form id="signup-form" action="">
+                    <input type="text" name="fname-sign" placeholder="Full Name" required><br><br>
+                    <input type="text" name="uname-sign" placeholder="Username" required><br><br>
+                    <input type="email" name="email-sign" placeholder="Email" required><br><br>
+                    <div class="eye-container">
+                        <input class="passwordInput" type="password" name="password-sign"
+                            placeholder="Password must be >= 8" required>
+                        <span class="toggle-password">
+                            <i class="fa-solid fa-eye-slash eye"></i>
+                        </span>
+                    </div><br>
+                    <div class="eye-container">
+                        <input class="passwordInput" type="password" name="confirm-password-sign"
+                            placeholder="Confirm Password" required>
+                        <span class="toggle-password" ">
+                            <i class=" fa-solid fa-eye-slash eye"></i>
+                        </span>
+                    </div><br>
+                    <div id="pass-len" class="err">
+                       
+                    </div>
+                    <button class="btn" id="SignUp-btn" type="submit">Sign Up</button>
+                </form>
+                <p class="signUp">
+                    Already have an account?
+                    <a id="logIn-link" href="#">Log In</a>
+                </p>
+            </div>
+        </div>
+        <div class="container hide ">
+            <div class="form ">
+                <h1>Log In</h1>
+                <form id="login-form" action="">
+                    <input type="email" name="email-login" placeholder="Email" required><br><br>
+                    <div class="eye-container">
+                        <input class="passwordInput" type="password" name="password-login" placeholder="Password"
+                            required>
+                        <span class="toggle-password">
+                            <i class="fa-solid fa-eye-slash eye"></i>
+                        </span>
+                    </div><br>
+                    <div id="error" class="err">
+
+                    </div>
+                    <button class="btn" id="logIn-btn" type="submit">Log In</button>
+                </form>
+                <p class="login">
+                    Don’t have an account?
+                    <a id="SignUp-link" href="#">Sign Up</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+`
+document.body.innerHTML = page;
 let signupform = document.querySelector("#signup-form");
 let loginform = document.querySelector("#login-form");
 let firstNameSignup = document.querySelector(`input[name="fname-sign"]`);
@@ -85,13 +147,9 @@ loginform.addEventListener("submit", (e) => {
         console.log(currentUser)
         localStorage.setItem("currentUser" , JSON.stringify(currentUser));
         // window.location.href = "" اكتب امتداد صفحة الهوم هنا
-        window.location.href="../Home/home.html"
-        document.querySelector("#error").innerHTML = `
-      <span style="color:red">
-          <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
-           ok
-        </span>
-      `;
+
+        
+        window.location.href = "./Home/home.html";
         return;
       } else if (emailLogin.value != emailLs ) {
         document.getElementById("error").innerHTML = `
@@ -103,7 +161,7 @@ loginform.addEventListener("submit", (e) => {
         `;
       }
       else {
-                document.getElementById("error").innerHTML = `
+         document.getElementById("error").innerHTML = `
          <span style="color:red">
           <i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>
            Password is Wrong
