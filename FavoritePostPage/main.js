@@ -60,6 +60,11 @@ if (user.avatar) {
       postHTML += `<img src="${post.image}" alt="Post Image">`;
     }
 
+        if (post.video) {
+      postHTML += `<video controls loop muted width="100%" >
+         <source src="${post.video}" type="video/mp4">
+       </video>`;
+    }
 
     if (post.title) {
       postHTML += `<h2>${post.title}</h2>`;

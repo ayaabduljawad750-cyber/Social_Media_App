@@ -147,9 +147,7 @@ loginform.addEventListener("submit", (e) => {
         console.log(currentUser)
         localStorage.setItem("currentUser" , JSON.stringify(currentUser));
         // window.location.href = "" اكتب امتداد صفحة الهوم هنا
-
-        
-        window.location.href = "./Home/home.html";
+        window.location.href="./Home/home.html"
         return;
       } else if (emailLogin.value != emailLs ) {
         document.getElementById("error").innerHTML = `

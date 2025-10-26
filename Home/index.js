@@ -39,7 +39,7 @@ function showPosts() {
   let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
   // ✅ نصلح أي بوستات قديمة ناقصة بيانات
-  posts = posts.map(p => ({
+  posts = posts.map((p) => ({
     likes: 0,
     liked: false,
     comments: [],
@@ -61,14 +61,23 @@ function showPosts() {
     div.innerHTML = `
       <p>${post.description}</p>
       ${post.image ? `<img src="${post.image}" class="post-img">` : ""}
+${
+  post.video
+    ? `<video controls loop muted class="post-img">
+         <source src="${post.video}" type="video/mp4">
+       </video>`
+    : ""
+}
       <div class="post-footer">
-        <button class="like-btn ${post.liked ? "liked" : ""}" data-index="${index}">
+        <button class="like-btn ${
+          post.liked ? "liked" : ""
+        }" data-index="${index}">
           ❤️ Like (${post.likes})
         </button>
         <span>${post.comments.length} comments</span>
       </div>
       <div class="comment-section" id="comments-${index}">
-        ${post.comments.map(c => `<div class="comment">${c}</div>`).join("")}
+        ${post.comments.map((c) => `<div class="comment">${c}</div>`).join("")}
         <div class="add-comment">
           <input type="text" placeholder="Write a comment..." id="commentInput-${index}">
           <button onclick="addComment(${index})">Post</button>
@@ -79,7 +88,7 @@ function showPosts() {
   });
 
   // تفعيل اللايكات
-  document.querySelectorAll(".like-btn").forEach(btn => {
+  document.querySelectorAll(".like-btn").forEach((btn) => {
     btn.addEventListener("click", handleLike);
   });
 
@@ -93,18 +102,20 @@ function handleAddPost(e) {
 
   const desc = document.getElementById("desc").value.trim();
   const imageLink = document.getElementById("imageLink").value.trim();
+  const videoLink = document.getElementById("videoLink").value.trim();
 
   if (!desc) return alert("Please write a description!");
 
   const posts = JSON.parse(localStorage.getItem("posts")) || [];
   const newPost = {
-    id:Date.now(), // I add it
+    id: Date.now(), // I add it
     description: desc,
     image: imageLink || "",
+    video: videoLink || "",
     likes: 0,
     liked: false,
     comments: [],
-    authorId:JSON.parse(localStorage.getItem("currentUser")).id // I add it 
+    authorId: JSON.parse(localStorage.getItem("currentUser")).id, // I add it
   };
 
   posts.push(newPost);

@@ -96,6 +96,8 @@ if (myPosts.length == 0) {
     let postUsername = document.createElement("h4");
     let postDate = document.createElement("p");
     let postImg = document.createElement("img");
+    let postVideo = document.createElement("video");
+    let postVideoSource = document.createElement("source");
     let postTitle = document.createElement("h3");
     let postDetails = document.createElement("p");
     let postAddLikeBox = document.createElement("div");
@@ -104,8 +106,6 @@ if (myPosts.length == 0) {
     let postAddLikeNumbers = document.createElement("span");
     let postAddCommentsIcon = document.createElement("i");
     let postAddCommentNumbers = document.createElement("span");
-    
-
 
     let postControlBox = controlBoxPost(post.id, post.authorId);
     postControlBox.style.display = "flex";
@@ -126,8 +126,13 @@ if (myPosts.length == 0) {
     postTopBox.appendChild(postTopBoxRightBox);
 
     postImg.src = post.image;
-    postCenterBox.appendChild(postImg);
-
+    postCenterBox.appendChild(post.video ? postVideo : postImg);
+    postVideoSource.src = post.video;
+    postVideoSource.type = "video/mp4";
+    postVideo.appendChild(postVideoSource);
+    postVideo.controls = true;
+    postVideo.muted = true;
+    postVideo.loop = true;
     postDetails.innerHTML = post.description;
 
     postBottomBox.appendChild(postDetails);
@@ -151,12 +156,6 @@ if (myPosts.length == 0) {
     postActions.appendChild(postAddLikeBox);
     postActions.appendChild(postAddCommentBox);
 
-
-    
-  
-  
-
-
     postCard.appendChild(postTopBox);
     postCard.appendChild(postCenterBox);
     postCard.appendChild(postBottomBox);
@@ -169,22 +168,23 @@ if (myPosts.length == 0) {
 
     postCenterBox.style.overflow = "hidden";
     postCenterBox.style.width = "100%";
-    postCenterBox.style.display = post.image == "" ? "none" : "block";
+    postCenterBox.style.display =
+      post.image == "" && post.video == "" ? "none" : "block";
     postImg.style.width = "100%";
     postImg.style.aspectRatio = "1/1";
     postImg.style.objectFit = "cover";
     postImg.style.transition = "transform 0.4s ease";
 
+    postVideo.style.width = "100%";
+    postVideo.style.aspectRatio = "1/1";
+    postVideo.style.objectFit = "cover";
+    postVideo.style.transition = "transform 0.4s ease";
+
     postCard.style.backgroundColor = "#fff";
     postCard.style.margin = "15px 15px";
     postCard.style.borderRadius = "15px";
 
-    for (let box of [
-      postTopBox,
-      postBottomBox,
-      postActions,
-    
-    ]) {
+    for (let box of [postTopBox, postBottomBox, postActions]) {
       box.style.padding = "20px 20px";
     }
 
@@ -236,8 +236,6 @@ if (myPosts.length == 0) {
       });
     }
 
-
-
     // Hover part
     postImg.addEventListener("mouseover", () => {
       postImg.style.transform = "scale(1.2)";
@@ -264,6 +262,7 @@ centerProfile.appendChild(boxPosts);
 
 // add style
 boxPosts.style.display = "flex";
+boxPosts.style.flexWrap = "wrap";
 boxPosts.style.justifyContent = "center";
 boxPosts.style.alignItems = "center";
 boxPosts.style.minHeight = "45vh";
